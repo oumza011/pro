@@ -1,0 +1,33 @@
+<div class="p-3" align="center">
+    <div class="card p-3">
+
+        <div class="row">
+            <div class="col-md-12">
+                <label style="font-size:xx-large;color: grey;"><b>Login Your Profile</b></label>
+            </div>
+            <div class="col-md-12" [hidden]="!loged">
+                <button class="btn btn-secondary" (click)="processLogout()"><i class="fa fa-sign-out"></i> Logout</button>
+            </div>
+            <div class="col-md-12" [hidden]="loged">
+                <div class="input-group">
+                    <input type="text" id="usernameLog" class="form-control mt-3" placeholder="Username">
+                </div>
+                <div class="input-group">
+                    <input class="form-control mt-3" id="passwordLog" [type]="psType" placeholder="Password">
+                    <div class="input-group-append">
+                        <button class="input-group-text mt-3" (click)="showPass()"><i class="fa {{eye}}"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" [hidden]="loged">
+                <span style="color: red;font-size: 9pt;" [hidden]="!checkLogin">เข้าสู่ระบบล้มเหลว กรุณาลงใหม่อีกครั้ง!</span>
+            </div>
+            <div class="col-md-6" [hidden]="loged">
+                <button class="btn btn-primary form-control mt-2" (click)="processLogin()"><i class="fa fa-sign-in"></i> Login </button>
+            </div>
+            <div class="col-md-6" [hidden]="loged">
+                <button class="btn btn-info form-control mt-2" routerLink="/register"><i class="fa fa-id-badge"></i> Register </button>
+            </div>
+        </div>
+    </div>
+</div>

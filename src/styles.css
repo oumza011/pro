@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "bootstrap/dist/css/bootstrap.css";
+@import "font-awesome/css/font-awesome.css";
+.wd150 {
+    width: 120px;
+    text-align: right;
+}
+
+.pic-fix {
+    position: center;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.wd200 {
+    width: 150px;
+    text-align: right;
+}
+
+input:focus {
+    outline: none;
+}
+
+.bg-red {
+    background-color: rgb(253, 205, 186);
+}
+
+.bg-green {
+    background-color: rgb(215, 252, 215)
+}
+
+.inp-bh {
+    border: hidden;
+}
+
+.closser:hover {
+    color: white;
+    background-color: rgb(216, 31, 31);
+}

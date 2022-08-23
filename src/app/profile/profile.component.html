@@ -1,0 +1,107 @@
+<div class="p-3" align="center">
+    <div style="position: relative;">
+        <div class="alert" [hidden]="!alertSuccess" style="z-index: 3;background-color: rgba(17, 165, 17, 0.7);width: 100%; position: absolute; top:0; font-size: 16pt;text-align: center;"> บันทึกสำเร็จ</div>
+        <div class="alert" [hidden]="!alertFailed" style="z-index: 3;background-color: rgba(253, 29, 29, 0.7);width: 100%; position: absolute; top:0; font-size: 16pt;text-align: center;"> บันทึกล้มเหลว กรุณาลองใหม่อีกครั้ง!</div>
+    </div>
+    <div class="card p-3">
+
+        <div class="row">
+            <div class="col-md-12">
+                <label style="font-size:xx-large;color: grey;"><b>Profile</b></label>
+            </div>
+            <div class="col-md-12 mb-2">
+                <div>
+                    <div class="mrg5-r" style="text-align: center;">
+                        <div style="position:relative;width:fit-content;display:inline-block;">
+                            <img id="showPic" src="{{srcProfile}}" class="rounded-circle pic-fix" style="border: 4px solid rgb(86, 154, 255);">
+                            <div style="z-index:2;position:absolute;bottom:0px;right:0px;">
+                                <i class="fa fa-camera" style="color:gray;cursor: pointer;" (click)="chootFile()" [hidden]="!flagEdit"></i>
+                                <input id="upPicPro" name="upPicPro" class="picPro" type="file" accept="image/gif, image/jpeg, image/png" (change)="changeProfile($event)" hidden>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{userName}} <i class="fa fa-cog" title="Edit Profile" style="cursor: pointer;" (click)="openEditFrofile()" [hidden]="flagEdit"></i><br>
+                <a href="javascript:void(0);" style="font-size: small;" [hidden]="!flagEdit||flagEditPasst" (click)="flagEditPass()">Change Password</a>
+                <div id="reNewPass" class="card p-2" [hidden]="!flagEditPasst">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div align="right">
+                                <div class="p-1 closser" style="width: 30px;text-align: center;cursor: pointer;" (click)="cancelEditPass()">
+                                    <i class="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div class=" input-group my-2 ">
+                                <div class="input-group-prepend ">
+                                    <span class="input-group-text wd200 ">Old Password : </span>
+                                </div>
+                                <input id="oldpass" type="{{psType0}}" class="form-control {{bCol0}} " (input)="resetAlertOldPass()" (focusout)="checkOldPassword($any($event.target).value) ">
+                                <div class="input-group-append ">
+                                    <button class="input-group-text " (click)="showPass0() "><i class="fa {{eye0}} "></i></button>
+                                </div>
+                            </div>
+                            <div>
+                                <span style="color: red;font-size: 9pt;" [hidden]="!checkOldPass">พาสเวิร์ดไม่ถูกต้อง</span>
+                            </div>
+                            <div class="input-group mb-2 ">
+                                <div class="input-group-prepend ">
+                                    <span class="input-group-text wd200 ">New Password : </span>
+                                </div>
+                                <input id="newpass" type="{{psType1}}" class="form-control {{bCol1}} " (input)="resetAlertNewPass()" (focusout)="checkPassword($any($event.target).value) ">
+                                <div class="input-group-append ">
+                                    <button class="input-group-text " (click)="showPass1() "><i class="fa {{eye1}} "></i></button>
+                                </div>
+                            </div>
+                            <div>
+                                <span style="color: red;font-size: 9pt;" [hidden]="!checknewPass">ไม่ตรงเงื่อนไขที่กำหนด</span>
+                            </div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text wd200">Re-New Password : <i class="fa fa-times" style="color: red;" [hidden]="checkRePass "></i> </span>
+                                </div>
+                                <input id="renewpass" type="{{psType2}}" class="form-control {{bCol2}}" (input)="resetAlertReNewPass()" (focusout)="checkRePassword($any($event.target).value)">
+                                <div class="input-group-append">
+                                    <button class="input-group-text" (click)="showPass2()"><i class="fa {{eye2}}"></i></button>
+                                </div>
+                            </div>
+                            <div>
+                                <span style="color: red;font-size: 9pt;" [hidden]="!checkerr">เกิดข้อผิดพลาดในการ update</span>
+                                <span style="color: red;font-size: 9pt;" [hidden]="!checkRePass">Password ไม่ตรงกัน</span>
+                                <span style="color: red;font-size: 9pt;" [hidden]="!checkdubPass">การแก้ไข password ห้ามซ้ำใน 5 ครั้งล่าสุดที่เคยแก้ไข password</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 ">
+                <table style="width: 400px; max-width: 100%; ">
+                    <tr>
+                        <td style="text-align: right;width: 50%; ">
+                            Firstname :
+                        </td>
+                        <td>
+                            <input id='fname' class="{{inputControl}} " value="{{fName}}" (input)="toUpperF($any($event.target).value) " [readonly]="!switchInput ">
+                            <span style="color: red;font-size: 9pt;" [hidden]="!checkfname">กรุณาป้อนชื่อ</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;width: 50%; ">
+                            Lastname :
+                        </td>
+                        <td>
+                            <input id='lname' class="{{inputControl}} " value="{{lName}}" (input)="toUpperL($any($event.target).value) " [readonly]="!switchInput ">
+                            <span style="color: red;font-size: 9pt;" [hidden]="!checklname">กรุณาป้อนสกุล</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-12 " [hidden]="!flagEdit ">
+                <button class="btn btn-success m-2 " (click)="updateProfile()"><i class="fa fa-floppy-o"></i> Save </button>
+                <button class="btn btn-warning m-2 " (click)="cancelEditFrofile() "><i class="fa fa-ban"></i> Cancel </button>
+            </div>
+            <!-- <div class="col-md-12 mt-2">
+                <button class="btn btn-secondary" routerLink="/"><i class="fa fa-sign-out"></i> Logout</button>
+            </div> -->
+        </div>
+    </div>
+</div>
